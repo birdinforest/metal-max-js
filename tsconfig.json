@@ -12,6 +12,11 @@
         "skipLibCheck": true,
 		"preserveConstEnums":true,
         "sourceMap": true,
-        "rootDir": "src"
-	}
+        "rootDir": "src",
+        "experimentalDecorators": true,
+        "allowSyntheticDefaultImports": true,
+        "downlevelIteration": true,
+    },
+
+    "exclude": [ "node_modules", "lib/ecstra/example" ]
 }
