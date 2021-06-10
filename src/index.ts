@@ -12,7 +12,7 @@ manager.start()
     .then(() => {
     console.log('Game started successfully.')
 }).catch(e => {
-    console.log('Game started failed: ', e);
+    console.error('Game started failed: ', e);
 })
 
 const socket = new WebSocket("ws://localhost:9999");
@@ -28,14 +28,14 @@ let currentState = state.DISCONNECTED;
 const changeState = (newState: string) => {
     currentState = newState;
     console.log("Current state: ", currentState);
-    
+
     switch (currentState) {
         case state.CONNECTED:
             // 239 is the packet id.
             const pSeedArray = [
-                239, 1, 0, 0, 
-                127, 0, 0, 0, 7, 
-                0, 0, 0, 0, 0, 0, 0, 
+                239, 1, 0, 0,
+                127, 0, 0, 0, 7,
+                0, 0, 0, 0, 0, 0, 0,
                 15, 0, 0, 0, 1
             ];
             const pSeedPacket = {
@@ -111,7 +111,7 @@ socket.onopen = () => {
     //     keepAlive: true,
     //     initialDelay:0,
     // };
-    
+
     // const host = {
     //     type: "connect",
     //     host: "127.0.0.1",
