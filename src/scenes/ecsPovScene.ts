@@ -18,6 +18,10 @@ import playerTextureUrl from "../../assets/textures/mm1_player.png";
 
 import * as ECS from "../ecs/index"
 
+
+/**
+ * Test my customized simple ECS framework. Located at `/src/ecs/`.
+ */
 export class EcsPovScene implements CreateSceneClass {
 
     createScene = async (
