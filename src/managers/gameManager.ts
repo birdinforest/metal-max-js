@@ -8,9 +8,9 @@ export class GameManager {
     private static _hasInitialized: boolean = false;
     private static _instance: GameManager;
     private static _engine: GameEngine;
-    
+
     private static options?: GameManagerOptions;
-    
+
 
     private constructor(options?: GameManagerOptions) {
         GameManager.options = options;
@@ -25,7 +25,7 @@ export class GameManager {
             GameManager._instance = new GameManager(options);
             GameManager._hasInitialized = true;
         }
-        
+
         // Initialize game engine.
         GameManager._engine = GameEngine.Initialization();
 
@@ -41,9 +41,9 @@ export class GameManager {
         if(!GameManager._hasInitialized) {
             throw new Error('GameManager has not been initialized.')
         }
-        
+
         await GameManager._engine.start().catch((e) => {
-            console.error(e);
+            throw new Error(e);
         });
     }
 }

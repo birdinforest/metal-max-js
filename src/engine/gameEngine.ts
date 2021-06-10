@@ -45,7 +45,7 @@ export class GameEngine {
     private static _hasInitialized: boolean = false;
     private static _instance: GameEngine;
     private static options?: GameEngineOptions;
-    
+
     private constructor(options?: GameEngineOptions) {
         GameEngine.options = options;
     }
@@ -72,15 +72,15 @@ export class GameEngine {
         if(!GameEngine._hasInitialized) {
             throw new Error('GameEngine has not been initialized.')
         }
-        
+
         await babylonInit(GameEngine.options)
             .then(() => {
                 log.infoEngine('Babylon initialization done.');
             })
             .catch(e => {
-            throw new Error('Babylon initialization failed: ' + e.toString());
+            throw new Error('Babylon initialization failed: \n' + e.stack + '\n' + e.message);
         });
-        
+
         // scene started rendering, everything is initialized
         log.infoEngine('Engine start rendering.')
     }
