@@ -291,11 +291,11 @@ class InputSystem extends ecstra.System {
 class PlayerControllerUpdateSystem extends ecstra.System {
     // Refactor
     private updateController(playerController: ControllerComponent, doMove: boolean, direction: Direction) {
-        playerController.facing = direction;
 
         const isMoving = playerController.velocity.lengthSquared() > 0;
         const changeDirection = playerController.facing !== direction;
         if (isMoving !== doMove || changeDirection) {
+            playerController.facing = direction;
             const velocity = playerController.velocity;
             const speed = playerController.speed;
             const buffSpeed = playerController.buffSpeed;
