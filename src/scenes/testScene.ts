@@ -42,12 +42,12 @@ export class TestScene implements CreateSceneClass {
             "my first camera",
             Math.PI/2,
             Math.PI/2,
-            0,
-            new Vector3(0, 0, 10),
+            10,
+            new Vector3(0, 0, 20),
             scene
         );
 
-        camera.mode = ArcRotateCamera.ORTHOGRAPHIC_CAMERA;
+        // camera.mode = ArcRotateCamera.ORTHOGRAPHIC_CAMERA;
 
         var distance = 10;
         // @ts-ignore
@@ -93,17 +93,19 @@ export class TestScene implements CreateSceneClass {
             .add(PlayerTagComponent)
             .add(SceneComponent, {scene: scene, name: 'testScene'})
             .add(PositionComponent)
-            .add(ControllerComponent, {speed: 1, buffSpeed: 0, velocity: new Vector2(0,0)})
+            .add(ControllerComponent, {speed: 0.1, buffSpeed: 0, velocity: new Vector2(0,0)})
             .add(RenderableComponent, {
                 spriteUrl: playerTextureUrl,
                 animationClips: playerAnimationClips,
-                playingAnimationClip: playerAnimationClips[AnimationClipNames.STAND_DOWN]
+                playingAnimationClip: playerAnimationClips[AnimationClipNames.STAND_DOWN],
+                animationFrameDelay: 100
             });
 
         /** Register system */
         world
             .register(InputSystem)
             .register(PlayerControllerUpdateSystem)
+            .register(PlayerTransformUpdateSystem)
             .register(RenderSystem);
 
         /** Register world update to BabylonJS */
@@ -219,7 +221,7 @@ class SceneComponent extends ecstra.ComponentData {
  * Systems
  **********************************************/
 
-/** Entity containing  */
+/** Input system */
 @ecstra.queries({
     scene: [SceneComponent]
 })
@@ -392,9 +394,9 @@ class PlayerControllerUpdateSystem extends ecstra.System {
     }
 }
 
-/** Entity containing renderable component and scene component*/
+/** Render system. Only handle player entity now. */
 @ecstra.queries({
-    renderable: [RenderableComponent, SceneComponent, ControllerComponent]
+    renderable: [RenderableComponent, SceneComponent, ControllerComponent, PositionComponent]
 })
 class RenderSystem extends ecstra.System {
     init() {
@@ -432,6 +434,7 @@ class RenderSystem extends ecstra.System {
         this.queries.renderable.execute(entity => {
             const controllerComponent = entity.read(ControllerComponent);
             const renderableComponent = entity.read(RenderableComponent);
+            const position = entity.read(PositionComponent)?.position;
 
             const sprite = renderableComponent?.sprite;
             const animationClips = renderableComponent?.animationClips;
@@ -487,7 +490,50 @@ class RenderSystem extends ecstra.System {
                     animationClips[animationNameToPlay].frames[1],
                     true, frameDelay);
             }
+
+            if(position) {
+                sprite.position = new Vector3(position[0], position[1], position[2]);
+            }
         });
+    }
+
+    dispose() {
+        super.dispose && super.dispose();
+        console.log('TestSystem >> dispose.');
+    }
+}
+
+/** Transform update system of player entity. */
+@ecstra.queries({
+    player: [PlayerTagComponent, ControllerComponent, PositionComponent]
+})
+class PlayerTransformUpdateSystem extends ecstra.System {
+    init() {
+        super.init && super.init();
+    }
+
+    execute(delta: number) {
+
+        this.queries.player.execute(entity => {
+            const controller = entity.read(ControllerComponent);
+
+            const position = entity.read(PositionComponent)?.position;
+
+            if(!controller) {
+                throw new Error('PlayerTransformUpdateSystem execute failed. Can not find player controller.');
+            }
+            if(!position) {
+                throw new Error('PlayerTransformUpdateSystem execute failed. Can not find postion component.');
+            }
+
+            const isMoving = controller.velocity.lengthSquared() > 0;
+            if(isMoving) {
+                position[0] += controller.velocity.x + controller.speed * delta / 1000
+                position[1] += controller.velocity.y + controller.speed * delta / 1000
+            }
+
+            // console.log('Position: ', position)
+        })
     }
 
     dispose() {
