@@ -34,7 +34,7 @@ const log = {
     /**
      * Default Log info with blue icon
      */
-    info: (...params: string[]) => {
+    info: (...params: any[]) => {
         doLog('info', '%c🔵 %s', consoleCss('#2B4CEA'), ...params);
     },
 
@@ -42,7 +42,7 @@ const log = {
      * Log error
      * @param  {...any} params
      */
-    error: (...params: string[]) => {
+    error: (...params: any[]) => {
         doLog('error', '%c⛔ %s', consoleCss('#A42B15'), ...params);
     },
 
@@ -50,7 +50,7 @@ const log = {
      * Log warning
      * @param  {...any} params
      */
-    warn: (...params: string[]) => {
+    warn: (...params: any[]) => {
         doLog('warn', '%c⚠️ %s', consoleCss('#ECB100'), ...params);
     },
 
@@ -58,18 +58,23 @@ const log = {
      * Log info with building icon
      * @param  {...any} params
      */
-    info3d: (...params: string[]) => {
+    info3d: (...params: any[]) => {
         if(LOGS_3D) {
             doLog('info', '%c🏣 %s', consoleCss('#ff6f00'), ...params);
         }
     },
-    
-    infoEngine: (...params: string[]) => {
+
+    infoEngine: (...params: any[]) => {
         if(LOGS_ENGINE) {
             doLog('info', '%c☢️ %s', consoleCss('#e78f0d'), ...params);
         }
-    }
+    },
 
+    infoECS: (...params: any[]) => {
+        if(LOGS_ENGINE) {
+            doLog('info', '%c[ECS] %s', consoleCss('#0d90e7'), ...params);
+        }
+    }
 };
 
 export default log;

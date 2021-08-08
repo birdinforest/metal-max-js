@@ -107,7 +107,7 @@ export class EcsPovScene implements CreateSceneClass {
                 const playerController = entity.getComponent('controller');
                 if(playerController) {
                     if(playerController.value.velocity === 0) {
-                        const isPlayingAnimation = player._animationStarted;
+                        const isPlayingAnimation = player.animationStarted;
                         if(isPlayingAnimation) {
                             player.stopAnimation();
                         }

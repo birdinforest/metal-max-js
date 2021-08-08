@@ -1,6 +1,7 @@
 import { getSceneModuleWithName } from "./createScene";
 import { Engine } from "@babylonjs/core/Engines/engine";
 import log from "./log";
+import {before} from "../../lib/ecstra/dist";
 
 const getModuleToLoad = (): string | undefined => {
     // ATM using location.search
@@ -11,7 +12,11 @@ const getModuleToLoad = (): string | undefined => {
     }
 }
 
-const babylonInit = async (options?: GameEngineOptions): Promise<void>  => {
+const babylonInit = async (
+    options?: GameEngineOptions,
+    beforeSceneRender?: Function,
+    afterSceneRender?: Function,
+): Promise<void>  => {
     // get the module to load
     const moduleName = getModuleToLoad();
     const createSceneModule = await getSceneModuleWithName(options?.sceneDirectoryPath, moduleName);
@@ -28,7 +33,9 @@ const babylonInit = async (options?: GameEngineOptions): Promise<void>  => {
 
     // Register a render loop to repeatedly render the scene
     engine.runRenderLoop(function () {
+        beforeSceneRender && beforeSceneRender(engine.getDeltaTime());
         scene.render();
+        afterSceneRender && afterSceneRender(engine.getDeltaTime());
     });
 
     // Watch for browser/canvas resize events
@@ -68,12 +75,19 @@ export class GameEngine {
     /**
      * Start engine.
      */
-    public async start(): Promise<void> {
+    public async start(
+        initialization?: Function,
+        beforeSceneRender?: Function,
+        afterSceneRender?: Function,
+        /** No implement */ dispose?: Function,
+    ): Promise<void> {
         if(!GameEngine._hasInitialized) {
             throw new Error('GameEngine has not been initialized.')
         }
 
-        await babylonInit(GameEngine.options)
+        initialization && initialization();
+
+        await babylonInit(GameEngine.options, beforeSceneRender, afterSceneRender)
             .then(() => {
                 log.infoEngine('Babylon initialization done.');
             })

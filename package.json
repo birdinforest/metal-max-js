@@ -17,12 +17,13 @@
   "license": "ISC",
   "dependencies": {
     "ammo.js": "github:kripken/ammo.js",
+    "typescript-logging": "^1.0.0",
     "webtcp": "^1.0.0"
   },
   "devDependencies": {
-    "@babylonjs/core": "^4.1.0",
-    "@babylonjs/loaders": "^4.1.0",
-    "@babylonjs/materials": "^4.1.0",
+    "@babylonjs/core": "^4.2.0",
+    "@babylonjs/loaders": "^4.2.0",
+    "@babylonjs/materials": "^4.2.0",
     "@typescript-eslint/eslint-plugin": "^2.30.0",
     "@typescript-eslint/parser": "^2.30.0",
     "clean-webpack-plugin": "^3.0.0",
