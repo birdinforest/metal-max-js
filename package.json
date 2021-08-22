@@ -16,6 +16,9 @@
   "author": "BirdinForest",
   "license": "ISC",
   "dependencies": {
+    "@babylonjs/gui": "^4.2.0",
+    "@babylonjs/inspector": "^4.2.0",
+    "@babylonjs/serializers": "^4.2.0",
     "ammo.js": "github:kripken/ammo.js",
     "typescript-logging": "^1.0.0",
     "webtcp": "^1.0.0"
