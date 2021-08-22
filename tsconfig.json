@@ -16,6 +16,7 @@
         "experimentalDecorators": true,
         "allowSyntheticDefaultImports": true,
         "downlevelIteration": true,
+        "resolveJsonModule": true,
     },
 
     "exclude": [ "node_modules", "lib/ecstra/example" ]
