@@ -64,6 +64,7 @@ export class GameManager {
             (delta: number) => {GameManager._beforeSceneRender.get(0)?.call(this, delta)},
             (delta: number) => {GameManager._afterSceneRender.get(0)?.call(this, delta)},
             dispose).catch((e) => {
+            console.error('GameManager._engine.start failed.')
             throw new Error(e);
         });
     }

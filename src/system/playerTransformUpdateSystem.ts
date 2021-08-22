@@ -28,8 +28,8 @@ export default class PlayerTransformUpdateSystem extends ecstra.System {
 
             const isMoving = controller.velocity.lengthSquared() > 0;
             if(isMoving) {
-                position[0] += controller.velocity.x + controller.speed * delta / 1000
-                position[1] += controller.velocity.y + controller.speed * delta / 1000
+                position[0] += controller.velocity.x * delta / 1000
+                position[2] += controller.velocity.y * delta / 1000
             }
 
             // console.log('Position: ', position)

@@ -40,11 +40,11 @@ export default class PlayerControllerUpdateSystem extends ecstra.System {
                             velocity.y = -(speed + buffSpeed);
                             break;
                         case Direction.LEFT:
-                            velocity.x = speed + buffSpeed;
+                            velocity.x = -(speed + buffSpeed);
                             velocity.y = 0;
                             break;
                         case Direction.RIGHT:
-                            velocity.x = -(speed + buffSpeed);
+                            velocity.x = speed + buffSpeed;
                             velocity.y = 0;
                             break;
                         default:

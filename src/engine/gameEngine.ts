@@ -92,7 +92,7 @@ export class GameEngine {
                 log.infoEngine('Babylon initialization done.');
             })
             .catch(e => {
-            throw new Error('Babylon initialization failed: \n' + e.stack + '\n' + e.message);
+            throw new Error('Babylon initialization failed: \n' + e);
         });
 
         // scene started rendering, everything is initialized
