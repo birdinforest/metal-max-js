@@ -1,0 +1,6 @@
+{
+  "name": "tilemap",
+  "dependencies": {
+    "chalk": "^3.0.0"
+  }
+}
