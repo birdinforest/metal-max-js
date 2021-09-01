@@ -1,0 +1,14 @@
+{ "columns":16,
+ "image":"..\/textures\/mm1_nes\/mm1_gnd_world.png",
+ "imageheight":192,
+ "imagewidth":512,
+ "margin":0,
+ "name":"mm1_nes_gnd_world",
+ "spacing":0,
+ "tilecount":96,
+ "tiledversion":"1.4.3",
+ "tileheight":32,
+ "tilewidth":32,
+ "type":"tileset",
+ "version":1.4
+}

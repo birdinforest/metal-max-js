@@ -1,0 +1,14 @@
+{ "columns":16,
+ "image":"..\/textures\/mm1_nes\/mm1_locate_general.png",
+ "imageheight":576,
+ "imagewidth":512,
+ "margin":0,
+ "name":"mm1_nes_location_general",
+ "spacing":0,
+ "tilecount":288,
+ "tiledversion":"1.4.3",
+ "tileheight":32,
+ "tilewidth":32,
+ "type":"tileset",
+ "version":1.4
+}
