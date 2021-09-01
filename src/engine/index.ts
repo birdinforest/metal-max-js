@@ -10,9 +10,18 @@ import { AssetsManager, TextFileAssetTask } from "@babylonjs/core/Misc/assetsMan
  * Default loading screen from Babylon
  * TODO: Assign it in engine. Config it when engine init.
  */
-import '@babylonjs/core/Loading/loadingScreen';
+import '@babylonjs/core/Loading/loadingScreen'
 
-import "@babylonjs/inspector";
+/**
+ * TODO: Create a separate file to import followings and toggle debug. For code split and side loading.
+ * https://forum.babylonjs.com/t/how-to-use-inspector-with-es6-modules/8619/17
+ * https://github.com/sebavan/BabylonjsInkSample/blob/master/src/debug/appDebug.ts
+ *
+ * A known issue about capture feature of inspector:
+ * https://forum.babylonjs.com/t/inspectors-tools-n-color3-is-not-a-constructor/8777
+ */
+import '@babylonjs/inspector'
+import '@babylonjs/core/Debug/debugLayer'
 
 
 export { Texture, Vector2, Vector3, Sprites, Scene, Engine, AssetsManager, TextFileAssetTask, KeyboardEventTypes }
